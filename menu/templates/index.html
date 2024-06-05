@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Restaurant Menu</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <h1>Restaurant Menu</h1>
         {% for meal in meals %}
             <h2>{{ meal.1 }}</h2>
                 {% for row in item_list %}
                     {% if row.category == meal.0 %}
                         {% if row.status == 0 %}
-                            <h3><del>{{ row.meal }}</del>></h3>
+                            <a href="{% url 'menu_item' row.pk %}"><h3><del>{{ row.meal }}</del>></h3></a>
                         {% else %}
-                            <h3>{{ row.meal }}</h3>
+                            <a href="{% url 'menu_item' row.pk %}"><h3>{{ row.meal }}</h3></a>
                         {% endif %}
                         <p>{{ row.description }}</p>
                     {% endif %}
                 {% endfor %}
         {% endfor %}
-</body>
-</html>
+{% endblock content %}
